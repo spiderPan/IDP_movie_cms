@@ -1,0 +1,13 @@
+## Deny access
+<FilesMatch "\.?htaccess$>
+    deny from all
+</FilesMatch>
+
+## Redirect user
+Redirect 301 /load.php /
+Redirect 301 /templates/header.php /
+Redirect 301 /templates/footer.php /
+
+Redirect 301 /movies_cms/load.php /movies_cms/
+Redirect 301 /movies_cms/templates/header.php /movies_cms/
+Redirect 301 /movies_cms/templates/footer.php /movies_cms/
