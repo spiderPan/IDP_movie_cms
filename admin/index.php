@@ -14,7 +14,12 @@ confirm_logged_in();
 <body>
     <h2>Welcome to the dashboard page, <?php echo $_SESSION['user_name']; ?>!</h2>
 
+    <h3>You are in level: <?php echo getCurrentUserLevel();?>
+    </h3>
+    <?php if (!empty($_SESSION['user_level'])):?>
     <a href="admin_createuser.php">Create User</a>
+    <?php endif;?>
+
     <a href="admin_logout.php">Sign Out</a>
 </body>
 

@@ -1,6 +1,6 @@
 <?php
 require_once '../load.php';
-confirm_logged_in();
+confirm_logged_in(true);
 
 
 if (isset($_POST['submit'])) {
@@ -9,6 +9,7 @@ if (isset($_POST['submit'])) {
         'username'=>trim($_POST['username']),
         'password'=>trim($_POST['password']),
         'email'=>trim($_POST['email']),
+        'user_level'=>trim($_POST['user_level']),
     );
 
     $message = createUser($data);
@@ -39,6 +40,15 @@ if (isset($_POST['submit'])) {
 
         <label for="email">Email</label>
         <input id="email" type="email" name="email" value=""><br><br>
+
+        <label for="user_level">User Level</label>
+        <select id="user_level" name="user_level">
+            <?php $user_level_map = getUserLevelMap();
+                foreach ($user_level_map as $val => $label):?>
+            <option value="<?php echo $val;?>"><?php echo $label;?>
+            </option>
+            <?php endforeach;?>
+        </select><br><br>
 
         <button type="submit" name="submit">Create User</button>
     </form>
