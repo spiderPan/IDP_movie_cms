@@ -38,6 +38,12 @@ services:
       PMA_USER: docker_u
       PMA_PASSWORD: docker_p
       PMA_HOSTS: mysql
+  
+  email:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
 
 volumes:
   mysql:
