@@ -18,6 +18,7 @@ confirm_logged_in();
     </h3>
     <?php if (isCurrentUserAdminAbove()): ?>
     <a href="admin_createuser.php">Create User</a>
+    <a href="admin_deleteuser.php">Delete User</a>
     <?php endif;?>
     <a href="admin_edituser.php">Edit User</a>
 
