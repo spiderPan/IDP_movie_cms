@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     if (!empty($username) && !empty($password)) {
-        $result = login($username, $password, $ip);
+        $result  = login($username, $password, $ip);
         $message = $result;
     } else {
         $message = 'Please fill out the required fields.';
@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <?php echo !empty($message)?$message:'';?>
+    <?php echo !empty($message) ? $message : ''; ?>
     <form action="admin_login.php" method="post">
         <label for="username">Username:</label>
         <input id="username" type="text" name="username" value="">

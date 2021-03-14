@@ -1,9 +1,9 @@
 <?php
 
-function redirect_to($location=null)
+function redirect_to($location = null)
 {
-    if ($location != null) {
-        header('Location: '.$location);
+    if (null != $location) {
+        header('Location: ' . $location);
         exit;
     }
 }
