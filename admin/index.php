@@ -21,6 +21,7 @@ confirm_logged_in();
     <a href="admin_deleteuser.php">Delete User</a>
     <?php endif;?>
     <a href="admin_edituser.php">Edit User</a>
+    <a href="admin_addmovie.php">Add Movie</a>
 
     <a href="admin_logout.php">Sign Out</a>
 </body>
