@@ -1,11 +1,11 @@
 <?php
-    require_once 'load.php';
-    if (isset($_GET['filter'])) {
-        $filter = $_GET['filter'];
-        $getMovies = getMoviesByGenre($filter);
-    } else {
-        $getMovies = getAllMovies();
-    }
+require_once 'load.php';
+if (isset($_GET['filter'])) {
+    $filter    = $_GET['filter'];
+    $getMovies = getMoviesByGenre($filter);
+} else {
+    $getMovies = getAllMovies();
+}
 ?>
 
 
@@ -21,10 +21,13 @@
 <body>
     <?php include 'templates/header.php';?>
 
-    <?php foreach ($getMovies as $movie):?>
+    <?php foreach ($getMovies as $movie): ?>
     <div class="movie-item">
-        <img src="images/<?php echo $movie['movies_cover']; ?>"
-            alt="<?php echo $movie['movies_title']; ?> Cover Image">
+        <picture>
+            <source srcset="images/<?php echo str_replace(array('.jpg', '.jpeg', '.png'), '.webp', $movie['movies_cover']); ?>" type="image/webp">
+            <img src="images/<?php echo $movie['movies_cover']; ?>" alt="<?php echo $movie['movies_title']; ?> Cover Image">
+        </picture>
+
         <h2><?php echo $movie['movies_title']; ?>
         </h2>
         <h4>Movie Released: <?php echo $movie['movies_release']; ?>
@@ -34,7 +37,7 @@
         <p><?php echo $movie['movies_storyline']; ?>
         </p>
         <a
-            href="details.php?id=<?php echo $movie['movies_id'];?>">More
+            href="details.php?id=<?php echo $movie['movies_id']; ?>">More
             details..</a>
     </div>
     <?php endforeach;?>

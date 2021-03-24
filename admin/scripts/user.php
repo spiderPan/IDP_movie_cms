@@ -74,32 +74,34 @@ function getSingleUser($id)
     }
 }
 
-function getAllUsers(){
+function getAllUsers()
+{
     $pdo = Database::getInstance()->getConnection();
 
     $get_user_query = 'SELECT * FROM tbl_user';
-    $users = $pdo->query($get_user_query);
+    $users          = $pdo->query($get_user_query);
 
-    if($users){
+    if ($users) {
         return $users;
-    }else{
+    } else {
         return false;
     }
 }
 
-function deleteUser($user_id){
-    $pdo = Database::getInstance()->getConnection();
-    $delete_user_query = 'DELETE FROM tbl_user WHERE user_id = :id';
-    $delete_user_set = $pdo->prepare($delete_user_query);
+function deleteUser($user_id)
+{
+    $pdo                = Database::getInstance()->getConnection();
+    $delete_user_query  = 'DELETE FROM tbl_user WHERE user_id = :id';
+    $delete_user_set    = $pdo->prepare($delete_user_query);
     $delete_user_result = $delete_user_set->execute(
         array(
-            ':id'=>$user_id
+            ':id' => $user_id,
         )
     );
 
-    if($delete_user_result && $delete_user_set->rowCount()>0){
+    if ($delete_user_result && $delete_user_set->rowCount() > 0) {
         redirect_to('admin_deleteuser.php');
-    }else{
+    } else {
         return false;
     }
 }
@@ -130,6 +132,7 @@ function editUser($user_data)
 
     if ($update_user_result) {
         $_SESSION['user_level'] = $user_data['user_level'];
+        $_SESSION['user_name']  = $user_data['fname'];
         redirect_to('index.php');
     } else {
         return 'Guess you got canned....';
@@ -145,7 +148,10 @@ function isUsernameExists($username)
 {
     $pdo = Database::getInstance()->getConnection();
     ## TODO: finish the following lines to check if there is another row in the tbl_user that has the given username
-    $user_exists_query  = 'SELECT COUNT(*) FROM tbl_user WHERE user_name = :username';
+    $user_exists_query = 'SELECT COUNT(*) FROM tbl_user WHERE user_name = :username';
+    if (!empty($_SESSION['user_id'])) {
+        $user_exists_query .= ' AND user_id != "' . $_SESSION['user_id'] . '"';
+    }
     $user_exists_set    = $pdo->prepare($user_exists_query);
     $user_exists_result = $user_exists_set->execute(
         array(
